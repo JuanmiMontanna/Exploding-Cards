@@ -1,0 +1,109 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+  border: black 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(20deg, rgba(201, 201, 201, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+button {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+button:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.imgPoints {
+  width: 150px;
+  height: auto;
+}
+
+.numberTop {
+  position: absolute;
+  top: 30px;
+  left: 5px;
+  margin: 0;
+}
+
+.numberBottom {
+  position: absolute;
+  bottom: 30px;
+  right: 5px;
+  margin: 0;
+  transform: rotate(180deg);
+}
+
+.imgR6LogoTop {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  margin: 0;
+}
+
+.imgR6LogoBottom {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  margin: 0;
+  transform: rotate(180deg);
+}
