@@ -3,18 +3,45 @@ import * as constants from "./constants.js"
 
 let deck = new Array();
 
-
-deckGenerator();
-deckShuffler(deck);
 let h1Element = document.createElement("h1");
+
 let divElement = document.createElement("div");
 divElement.classList.add("card");
+
 let buttonElement = document.createElement("button");
 buttonElement.innerText = "Draw card";
-let buttonRestartElement = document.createElement("button");
 
-document.body.appendChild(buttonElement);
-document.body.appendChild(divElement);
+let h2ElementName = document.createElement("h2");
+
+let h2ElementValue = document.createElement("h2");
+
+let buttonRestartElement = document.createElement("button");
+buttonRestartElement.innerText = "Restart";
+
+let header = document.createElement("div");
+header.classList.add("header");
+
+let footer = document.createElement("div");
+
+let divDescriptionElement = document.createElement("div");
+divDescriptionElement.classList.add("description");
+
+let imgLogoElement = document.createElement("img");
+imgLogoElement.classList.add("imgLogo");
+
+let imgMainElement = document.createElement("img");
+imgMainElement.classList.add("imgMain");
+
+let descriptionElement = document.createElement("p");
+
+h1Element.innerText = "Exploding Cards";
+deckGenerator();
+deckShuffler(deck);
+
+divDescriptionElement.append(h2ElementName, descriptionElement);
+header.append(imgLogoElement, divDescriptionElement, h2ElementValue);
+
+document.body.append(h1Element, buttonElement, divElement);
 
 buttonElement.addEventListener("click", drawCard);
 buttonRestartElement.addEventListener("click", restartGame);
@@ -22,8 +49,9 @@ buttonRestartElement.addEventListener("click", restartGame);
 function restartGame() {
   h1Element.remove();
   buttonRestartElement.remove();
-  document.body.appendChild(buttonElement);
-  document.body.appendChild(divElement);
+  document.body.append(h1Element, buttonElement, divElement);
+  h1Element.innerText = "Exploding Cards";
+  document.body.style.backgroundImage = "url('images/body/body1.jpg')";
 }
 
 function deckGenerator() {
@@ -64,10 +92,9 @@ function drawCard() {
   if (deck.length === 0) {
     divElement.remove();
     buttonElement.remove();
-    buttonRestartElement.innerText = "Restart";
-    document.body.appendChild(buttonRestartElement);
-    h1Element.innerText = "Fin del juego";
+    h1Element.innerText = "Game Over";
     document.body.appendChild(h1Element);
+    document.body.appendChild(buttonRestartElement);
     deckGenerator();
     deckShuffler(deck);
     return;
@@ -75,42 +102,50 @@ function drawCard() {
 
   console.log(deck);
 
+  if (deck.length <= 60 && deck.length >= 46) {
+    document.body.style.backgroundImage = "url('images/body/body1.jpg')";
+  } else if (deck.length <= 45 && deck.length >= 31) {
+    document.body.style.backgroundImage = "url('images/body/body3.jpg')";
+  } else if (deck.length <= 30 && deck.length >= 16) {
+    document.body.style.backgroundImage = "url('images/body/body4.jpg')";
+  } else if (deck.length <= 15) {
+    document.body.style.backgroundImage = "url('images/body/body2.webp')";
+  }
+
   let card = deck.pop(); // Get and delete the last card of the deck
   divElement.innerHTML = '';
-
+  divElement.className = 'card'; // Restart the classes, keeping only the "card" class
+  divElement.classList.add(card.name.toLowerCase());
+  h2ElementName.innerText = card.name;
+  descriptionElement.innerText = card.description;
+  imgLogoElement.setAttribute("src", card.logo);
   if (card.value != null) {
-    let h1ElementValue = document.createElement("h1");
-    h1ElementValue.innerText = card.value;
-    h1ElementValue.classList.add("numberTop")
-    divElement.appendChild(h1ElementValue);
-    let imgR6LogoElement = document.createElement("img");
-    imgR6LogoElement.classList.add("imgR6LogoTop")
-    imgR6LogoElement.setAttribute("src", "images/Points/Logos/R6-Logo.png");
-    divElement.appendChild(imgR6LogoElement);
-  }
-
-  if (card.name == constants.CARD_TYPES.POINTS) {
-    let href = imgPoint(card.value);
-    let imgPointsElement = document.createElement("img");
-    imgPointsElement.classList.add("imgPoints")
-    imgPointsElement.setAttribute("src", href)
-    divElement.appendChild(imgPointsElement);
+    imgMainElement.setAttribute("src", imgPoint(card.value));
   } else {
-    let h1ElementName = document.createElement("h1");
-    h1ElementName.innerText = card.name;
-    divElement.appendChild(h1ElementName);
+    let main;
+    switch (card.name) {
+      case (constants.CARD_TYPES.BOMB):
+        main = "images/bomb.webp";
+        break;
+      case (constants.CARD_TYPES.DEFUSE):
+        main = "images/defuser.png";
+        break;
+      case (constants.CARD_TYPES.NOPE):
+        main = "images/barricade.webp";
+        break;
+      case (constants.CARD_TYPES.SKIPTURN):
+        main = "images/dron.png";
+        break;
+    }
+    imgMainElement.setAttribute("src", main);
   }
-
+  h2ElementValue.innerText = "";
   if (card.value != null) {
-    let h1ElementValue = document.createElement("h1");
-    h1ElementValue.innerText = card.value;
-    h1ElementValue.classList.add("numberBottom")
-    divElement.appendChild(h1ElementValue);
-    let imgR6LogoElement = document.createElement("img");
-    imgR6LogoElement.classList.add("imgR6LogoBottom")
-    imgR6LogoElement.setAttribute("src", "images/Points/Logos/R6-Logo.png");
-    divElement.appendChild(imgR6LogoElement);
+    h2ElementValue.innerText = card.value;
   }
+  footer = header.cloneNode(true);
+  footer.className = "footer";
+  divElement.append(header, imgMainElement, footer);
 }
 
 function getRandomNumber(min, max) {

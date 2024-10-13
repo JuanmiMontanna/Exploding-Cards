@@ -1,30 +1,93 @@
-html {
-  height: 100%;
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-size: calc(var(--defaultSize) * 4);
+  font-family: 'Merriweather', sans-serif;
+}
+
+:root {
+  --defaultSize: 4px;
+  --cardWidth: 250px;
+  --cardHeight: 375px;
+
+  --black: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+  --springgreen: rgb(0, 255, 127);
+  --darkGreen: rgb(0, 64, 0);
+  --darkgrey: rgb(77, 77, 77);
+  --lightGrey: rgb(220, 220, 220);
+  --blue: rgb(85, 85, 255);
+  --darkBlue: rgb(0, 0, 64);
+  --lightRed: rgb(255, 85, 85);
+  --darkRed: rgb(64, 0, 0);
 }
 
 body {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url('images/body/body1.jpg');
+  background-size: cover;
+  background-position: center;
+  gap: calc(var(--defaultSize) * 8);
 }
 
 h1 {
+  font-size: 7rem;
+  color: var(--springgreen);
   margin-bottom: 0;
   margin-top: 0;
 }
 
+h2,
+p {
+  margin: 0;
+}
+
+h2 {
+  font-size: calc(var(--defaultSize) * 7);
+}
+
+p {
+  font-size: calc(var(--defaultSize) * 3);
+}
+
 .card {
-  width: 200px;
-  height: 300px;
-  border: black 1px solid;
+  width: var(--cardWidth);
+  height: var(--cardHeight);
+  border: var(--black) 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  background: linear-gradient(20deg, rgba(201, 201, 201, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  border-radius: calc(var(--defaultSize) * 3);
+  background-image: url('images/mazo.png');
+  background-size: calc(var(--defaultSize) * 120);
+  background-position: center;
+  box-shadow: calc(var(--defaultSize) * 2) calc(var(--defaultSize) * 2) calc(var(--defaultSize) * 2) rgba(255, 255, 255, 0.5);
+}
+
+.bomb {
+  background: linear-gradient(20deg, var(--black), var(--darkgrey));
+}
+
+.defuse {
+  background: linear-gradient(20deg, var(--darkGreen), var(--springgreen));
+}
+
+.jump {
+  background: linear-gradient(20deg, var(--darkBlue), var(--blue));
+}
+
+.nope {
+  background: linear-gradient(20deg, var(--darkRed), var(--lightRed));
+}
+
+.points {
+  background: linear-gradient(20deg, var(--lightGrey), var(--white));
 }
 
 button {
@@ -56,7 +119,6 @@ button {
   white-space: nowrap;
   will-change: box-shadow, transform;
   font-size: 18px;
-  margin-bottom: 30px;
 }
 
 button:focus {
@@ -73,37 +135,25 @@ button:active {
   transform: translateY(2px);
 }
 
-.imgPoints {
+.imgMain {
   width: 150px;
-  height: auto;
+  height: 230px;
 }
 
-.numberTop {
-  position: absolute;
-  top: 30px;
-  left: 5px;
-  margin: 0;
+
+.imgLogo {
+  height: calc(var(--defaultSize) * 10);
+  width: calc(var(--defaultSize) * 10);
 }
 
-.numberBottom {
-  position: absolute;
-  bottom: 30px;
-  right: 5px;
-  margin: 0;
-  transform: rotate(180deg);
+.header,
+.footer {
+  display: flex;
+  padding: 0px;
+  height: 90vh;
+  width: var(--cardWidth);
 }
 
-.imgR6LogoTop {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  margin: 0;
-}
-
-.imgR6LogoBottom {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  margin: 0;
+.footer {
   transform: rotate(180deg);
 }
